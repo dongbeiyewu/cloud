@@ -1,0 +1,44 @@
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <h1>sunqiming
+        <br>utaid：1001990822</h1>
+</head>
+
+<body>
+    <form action="http://localhost:4396/addpeople" method="POST">
+        add people：<br/> name:
+        <input type="text" name="name" /><br/> num:
+        <input type="text" name="num" /><br/> picture:
+        <input type="text" name="pic" /><br/> keywords:
+        <input type="text" name="keywords" /><br/>
+        <input type="submit" />
+    </form>
+    <form action="http://localhost:4396/searchpeople" method="POST">
+        sreach people：<input type="text" name="username" /><br/>
+        <input type="submit" />
+    </form>
+    <form action="http://localhost:4396/deletepeople" method="POST">
+        delete people：<input type="text" name="username" /><br/>
+        <input type="submit" />
+    </form>
+    <form action="http://localhost:4396/update" method="POST">
+        update people by csv：<br/>
+        <input type="submit" />
+    </form>
+    <form enctype="multipart/form-data" action="http://localhost:4396/uploadcsv" method="post">
+        Upload people info csv file
+        <input type="file" name="uploadfile" />
+        <input type="hidden" name="token" value="{{.}}" />
+        <input type="submit" value="upload" />
+    </form>
+    <form enctype="multipart/form-data" action="http://localhost:4396/uploadpic" method="post">
+        Upload img
+        <input type="file" name="uploadfile" />
+        <input type="hidden" name="token" value="{{.}}" />
+        <input type="submit" value="upload" />
+    </form>
+</body>
+
+</html>
