@@ -1,7 +1,6 @@
 package main
 
 import (
-	"cloud/model"
 	"crypto/md5"
 	"encoding/csv"
 	"fmt"
@@ -17,14 +16,14 @@ import (
 // 添加
 
 func addpeople(w http.ResponseWriter, r *http.Request) {
-	people := &model.People{
+	people := &moodel.People{
 		Name:     r.FormValue("name"),
 		Num:      r.FormValue("num"),
 		Picture:  r.FormValue("pic"),
 		Keywords: r.FormValue("keywords"),
 	}
 	people.AddPeople(people)
-	people2 := &model.People{}
+	people2 := &moodel.People{}
 	p, _ := people2.GetUsers()
 	t := template.Must(template.ParseFiles("web/index.html", "web/people.html", "web/pic.html"))
 	t.ExecuteTemplate(w, "index.html", "")
@@ -65,7 +64,7 @@ func upload(w http.ResponseWriter, r *http.Request) {
 	}
 	t := template.Must(template.ParseFiles("web/index.html", "web/people.html", "web/pic.html"))
 	t.ExecuteTemplate(w, "index.html", "")
-	people := &model.People{}
+	people := &moodel.People{}
 	p, _ := people.GetUsers()
 	for _, v := range p {
 		//fmt.Printf("第%v个用户是%v：\n", k+1, v)
@@ -89,7 +88,7 @@ func update(w http.ResponseWriter, r *http.Request) {
 		if err != nil {
 			log.Fatal(err)
 		}
-		people := &model.People{
+		people := &moodel.People{
 			Name:     record[0],
 			Num:      record[1],
 			Picture:  record[2],
@@ -99,7 +98,7 @@ func update(w http.ResponseWriter, r *http.Request) {
 	}
 	t := template.Must(template.ParseFiles("web/index.html", "web/people.html", "web/pic.html"))
 	t.ExecuteTemplate(w, "index.html", "")
-	people2 := &model.People{}
+	people2 := &moodel.People{}
 	p, _ := people2.GetUsers()
 	for _, v := range p {
 		//fmt.Printf("第%v个用户是%v：\n", k+1, v)
@@ -110,7 +109,7 @@ func update(w http.ResponseWriter, r *http.Request) {
 func showindex(w http.ResponseWriter, r *http.Request) {
 	//t, _ := template.ParseFiles("web/people.html")
 	t := template.Must(template.ParseFiles("web/index.html", "web/people.html", "web/pic.html"))
-	people := &model.People{}
+	people := &moodel.People{}
 	p, _ := people.GetUsers()
 	//json, _ := json.Marshal(p[0])
 	t.ExecuteTemplate(w, "index.html", "")
@@ -121,7 +120,7 @@ func showindex(w http.ResponseWriter, r *http.Request) {
 	}
 }
 func searchpeople(w http.ResponseWriter, r *http.Request) {
-	people := &model.People{
+	people := &moodel.People{
 		Name: r.FormValue("username"),
 	}
 	p, _ := people.GetUserByname()
@@ -134,13 +133,13 @@ func searchpeople(w http.ResponseWriter, r *http.Request) {
 
 }
 func deletepeople(w http.ResponseWriter, r *http.Request) {
-	people := &model.People{
+	people := &moodel.People{
 		Name: r.FormValue("username"),
 	}
 	people.DeletePeople(people)
 	t := template.Must(template.ParseFiles("web/index.html", "web/people.html", "web/pic.html"))
 	t.ExecuteTemplate(w, "index.html", "")
-	people2 := &model.People{}
+	people2 := &moodel.People{}
 	p, _ := people2.GetUsers()
 	for _, v := range p {
 		//fmt.Printf("第%v个用户是%v：\n", k+1, v)
@@ -178,7 +177,7 @@ func uploadpicHandle(w http.ResponseWriter, r *http.Request) {
 	}
 	t := template.Must(template.ParseFiles("web/index.html", "web/people.html", "web/pic.html"))
 	t.ExecuteTemplate(w, "index.html", "")
-	people := &model.People{}
+	people := &moodel.People{}
 	p, _ := people.GetUsers()
 	for _, v := range p {
 		t.ExecuteTemplate(w, "people.html", v)
