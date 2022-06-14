@@ -168,7 +168,7 @@ func uploadpicHandle(w http.ResponseWriter, r *http.Request) {
 		}
 		defer file.Close()
 		fmt.Fprintf(w, "%v", handler.Header)
-		f, err := os.OpenFile("./uploadedpic/"+handler.Filename, os.O_WRONLY|os.O_CREATE, 0666) // 此处假设当前目录下已存在test目录
+		f, err := os.OpenFile("./uppic/"+handler.Filename, os.O_WRONLY|os.O_CREATE, 0666) // 此处假设当前目录下已存在test目录
 		if err != nil {
 			fmt.Println(err)
 			return
@@ -194,7 +194,7 @@ func errorHandle(err error, w http.ResponseWriter) {
 }
 
 func main() {
-	fs := http.FileServer(http.Dir("uploadedpic/"))
+	fs := http.FileServer(http.Dir("uppic/"))
 
 	http.Handle("/static/", http.StripPrefix("/static/", fs))
 	// 调用处理器处理请求
